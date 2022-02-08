@@ -14,6 +14,18 @@ public class Error {
         this.message = message;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     public void printInfo() {
         System.out.println("Активность " + active);
         System.out.println("Статус " + status);
