@@ -35,8 +35,13 @@ public class Builder extends Engineer {
 
     public static void main(String[] args) {
         Builder ivan = new Builder("Ivan", "Ivanov", "High", "11.11.2011", "High", "Jukebox builder");
+        System.out.println("Привет! Я строитель и меня зовут " + ivan.getName());
+        System.out.println("Создаю музыкальный ящик...");
+        System.out.println("Включаю музыку");
+        System.out.println();
         Jukebox bigBen = ivan.makeJukebox();
         bigBen.music(2);
+        System.out.println();
         System.out.println(ivan.toString());
     }
 }
