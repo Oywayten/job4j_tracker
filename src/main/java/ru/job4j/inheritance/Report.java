@@ -1,23 +1,13 @@
 package ru.job4j.inheritance;
 
-public class Report extends Diagnosis {
+public class Report {
     private String report;
 
-    public Report() {
-    }
-
-    public Report(Diagnosis diagnosis, String report) {
-        super(diagnosis.getName(), diagnosis.getAge(), diagnosis.getDiagnosis());
+    public Report(String report) {
         this.report = report;
     }
 
-    public Report(String name, int age, String diagnosis, String report) {
-        super(name, age, diagnosis);
-        this.report = report;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + "\nОтчёт о лечении: " + report;
+    public String reportToString(Diagnosis diagnosis) {
+        return  diagnosis.toString() + "\nTreatment report: " + report;
     }
 }

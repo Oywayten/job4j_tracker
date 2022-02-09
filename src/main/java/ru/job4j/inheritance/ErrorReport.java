@@ -5,9 +5,6 @@ import ru.job4j.oop.Error;
 public class ErrorReport extends ru.job4j.oop.Error {
     private String report;
 
-    public ErrorReport() {
-    }
-
     public ErrorReport(boolean active, int status, String message, String report) {
         super(active, status, message);
         this.report = report;

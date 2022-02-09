@@ -6,9 +6,6 @@ import ru.job4j.oop.Jukebox;
 public class Builder extends Engineer {
     private String specialization;
 
-    public Builder() {
-    }
-
     public Builder(String name, String surname, String education, String birthday, String category, String specialization) {
         super(name, surname, education, birthday, category);
         this.specialization = specialization;

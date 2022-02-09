@@ -3,9 +3,6 @@ package ru.job4j.inheritance;
 public class Programmer extends Engineer {
     private String lang;
 
-    public Programmer() {
-    }
-
     public Programmer(String name, String surname, String education, String birthday, String category, String lang) {
         super(name, surname, education, birthday, category);
         this.lang = lang;

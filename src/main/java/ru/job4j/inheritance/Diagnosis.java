@@ -1,14 +1,22 @@
 package ru.job4j.inheritance;
 
-public class Diagnosis extends Pacient {
+public class Diagnosis {
+    private String pacientName;
+    private int pacientAge;
     private String diagnosis;
 
-    public Diagnosis() {
+    public Diagnosis(String name, int age, String diagnosis) {
+        pacientName = name;
+        pacientAge = age;
+        this.diagnosis = diagnosis;
     }
 
-    public Diagnosis(String name, int age, String diagnosis) {
-        super(name, age);
-        this.diagnosis = diagnosis;
+    public String getPacientName() {
+        return pacientName;
+    }
+
+    public int getPacientAge() {
+        return pacientAge;
     }
 
     public String getDiagnosis() {
@@ -17,7 +25,10 @@ public class Diagnosis extends Pacient {
 
     @Override
     public String toString() {
-        return "Имя пациента: " + getName() + "\nВозраст пациента: " + getAge() + "\nДиагноз: " + diagnosis;
+        return "Summary by Pacient research " + System.lineSeparator() + "Patient's name: "
+                + getPacientName() + "\nAge: "
+                + getPacientAge() + "\nDiagnosis: "
+                + diagnosis + System.lineSeparator();
     }
 
 }
