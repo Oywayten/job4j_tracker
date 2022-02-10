@@ -31,6 +31,9 @@ public class Tracker {
 
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
+        if ((index == -1) || (item == null)) {
+            return false;
+        }
         items[index].setName(item.getName());
         return item.getName().equals(items[index].getName());
     }
