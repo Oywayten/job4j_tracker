@@ -35,6 +35,17 @@ public class Tracker {
         return item.getName().equals(items[index].getName());
     }
 
+    public boolean delete(int id) {
+        int index = indexOf(id);
+        if (index == -1) {
+            return false;
+        }
+        items[index] = null;
+        System.arraycopy(items, id, items, id - 1, items.length - id - 1);
+        size--;
+        return true;
+    }
+
         public Item[] findAll() {
             Item[] all = new Item[items.length];
             size = 0;
