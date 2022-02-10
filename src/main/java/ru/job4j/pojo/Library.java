@@ -21,16 +21,10 @@ public class Library {
         for (int i = 0; i < library.length; i++) {
             System.out.println(library[i]);
         }
-        System.out.println();
-        for (int i = 0; i < library.length; i++) {
-            if (library[i].equals(cleanCode)) {
-                System.out.println(library[i]);
-            }
-        }
 
         System.out.println();
         for (int i = 0; i < library.length; i++) {
-            if (library[i].getName() == "Clean Code") {
+            if ("Clean Code".equals(library[i].getName())) {
                 System.out.println(library[i]);
             }
         }
