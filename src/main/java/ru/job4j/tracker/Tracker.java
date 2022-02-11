@@ -31,11 +31,13 @@ public class Tracker {
 
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
+        int oldId = items[index].getId();
         if (index == -1) {
             return false;
         }
-        items[index].setName(item.getName());
-        return item.getName().equals(items[index].getName());
+        items[index] = item;
+        items[index].setId(oldId);
+        return true;
     }
 
     public boolean delete(int id) {
@@ -43,7 +45,7 @@ public class Tracker {
         if (index == -1) {
             return false;
         }
-            System.arraycopy(items, index + 1, items, index, items.length - index - 1);
+            System.arraycopy(items, index + 1, items, index, size - index - 1);
         items[size - 1] = null;
         size--;
         return true;
