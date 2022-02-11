@@ -36,7 +36,7 @@ public class Tracker {
             return false;
         }
         items[index] = item;
-        items[index].setId(oldId);
+         items[index].setId(oldId);
         return true;
     }
 
