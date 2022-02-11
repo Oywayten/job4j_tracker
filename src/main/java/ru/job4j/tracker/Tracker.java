@@ -31,12 +31,12 @@ public class Tracker {
 
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
-        int oldId = items[index].getId();
         if (index == -1) {
             return false;
         }
+        int oldId = items[index].getId();
         items[index] = item;
-         items[index].setId(oldId);
+        items[index].setId(oldId);
         return true;
     }
 
