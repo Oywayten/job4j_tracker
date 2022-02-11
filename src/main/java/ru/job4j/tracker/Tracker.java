@@ -43,8 +43,8 @@ public class Tracker {
         if (index == -1) {
             return false;
         }
-        items[index] = null;
-        System.arraycopy(items, id, items, id - 1, items.length - id - 1);
+            System.arraycopy(items, index + 1, items, index, items.length - index - 1);
+        items[size - 1] = null;
         size--;
         return true;
     }
