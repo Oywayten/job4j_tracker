@@ -6,7 +6,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
-    @Test
+/*    @Test
     public void whenAddItem() {
         String[] answer = {"Fix PC"};
         Input input = new StubInput(answer);
@@ -15,8 +15,8 @@ public class StartUITest {
         Item created = tracker.findAll()[0];
         Item expected = new Item("Fix PC");
         assertThat(created.getName(), is(expected.getName()));
-    }
-
+    }*/
+/*
     @Test
     public void whenEditItem() {
         Tracker tracker = new Tracker();
@@ -40,5 +40,5 @@ public class StartUITest {
                 String.valueOf(item.getId())};
         StartUI.deleteItem(new StubInput(answers), tracker);
         assertNull(tracker.findById(item.getId()));
-    }
+    }*/
 }
