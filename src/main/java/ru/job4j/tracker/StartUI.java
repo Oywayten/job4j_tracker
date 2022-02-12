@@ -22,7 +22,7 @@ public class StartUI {
         }
     }
 
-    public static void showAllItems(Input input, Tracker tracker) {
+    public static void showAllItems(Tracker tracker) {
         System.out.println("=== Show all items ===");
         Item[] items = tracker.findAll();
         if (items.length > 0) {
@@ -76,7 +76,7 @@ public class StartUI {
             if (select == 0) {
                 StartUI.createItem(input, tracker);
             } else if (select == 1) {
-                StartUI.showAllItems(input, tracker);
+                StartUI.showAllItems(tracker);
             } else if (select == 2) {
                 StartUI.editItem(input, tracker);
             } else if (select == 3) {
