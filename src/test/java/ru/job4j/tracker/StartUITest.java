@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
     @Test
-    public void whenCreateItem() {
+    public void whenCreateItemTestOutputIsSuccessfully() {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}
@@ -67,7 +67,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenExit() {
+    public void whenExitTestOutputIsSuccessfully() {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0"}
