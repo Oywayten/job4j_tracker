@@ -11,7 +11,7 @@ public class TrackerTest {
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
         Item item = new Item();
-        item.setName("test1");
+        item.setName("Test1");
         tracker.add(item);
         Item result = tracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
