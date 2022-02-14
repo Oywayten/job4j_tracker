@@ -17,10 +17,9 @@ public class FindEl {
     public static void main(String[] args) {
         String[] s = {"dfs", "dsgsd"};
         try {
-            indexOf(s,"dev");
+            indexOf(s, "dev");
         } catch (ElementNotFoundException e) {
             e.printStackTrace();
         }
     }
-
 }
