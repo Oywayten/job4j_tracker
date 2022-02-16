@@ -89,7 +89,7 @@ public class StartUITest {
         Item one = tracker.add(new Item("Item name"));
         Item two = tracker.add(new Item("Item name2"));
         Input in = new StubInput(
-                new String[] {"0", "1", "1"}
+                new String[] {"0", String.valueOf(one.getId()), "1"}
         );
         UserAction[] actions = {
                 new FindByIdAction(out),
