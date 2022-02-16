@@ -62,7 +62,17 @@ public class StartUITest {
                 new Exit(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("Item name"));
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is("Menu:" + ln
+                        + "0. Show all Item" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Show all items ===" + ln
+                        + one.toString() + ln
+                        + "Menu:" + ln
+                        + "0. Show all Item" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Exit Program ===" + ln
+                        ));
     }
 
     @Test
@@ -79,7 +89,17 @@ public class StartUITest {
                 new Exit(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findById(item.getId()), is(nullValue()));
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is("Menu:" + ln
+                + "0. Delete Item" + ln
+                + "1. Exit Program" + ln
+                + "=== Delete item ===" + ln
+                + "Заявка удалена успешно" + ln
+                + "Menu:" + ln
+                + "0. Delete Item" + ln
+                + "1. Exit Program" + ln
+                + "=== Exit Program ===" + ln
+        ));
     }
 
     @Test
@@ -96,7 +116,17 @@ public class StartUITest {
                 new Exit(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findAll()[1].getName(), is("Item name2"));
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is("Menu:" + ln
+                + "0. Find Item by id" + ln
+                + "1. Exit Program" + ln
+                + "=== Find item by id ===" + ln
+                + one.toString() + ln
+                + "Menu:" + ln
+                + "0. Find Item by id" + ln
+                + "1. Exit Program" + ln
+                + "=== Exit Program ===" + ln
+        ));
     }
 
     @Test
@@ -114,7 +144,17 @@ public class StartUITest {
                 new Exit(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findByName("Item name2")[0].getName(), is("Item name2"));
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is("Menu:" + ln
+                + "0. Find Items by name" + ln
+                + "1. Exit Program" + ln
+                + "=== Find items by name ===" + ln
+                + two.toString() + ln
+                + "Menu:" + ln
+                + "0. Find Items by name" + ln
+                + "1. Exit Program" + ln
+                + "=== Exit Program ===" + ln
+        ));
     }
 
     @Test
