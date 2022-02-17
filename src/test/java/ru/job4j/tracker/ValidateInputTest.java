@@ -44,7 +44,6 @@ public class ValidateInputTest {
         assertThat(selected, is(4));
     }
 
-    @Ignore
     @Test
     public void whenNegativeInvalidInput() {
         Output out = new StubOutput();
@@ -53,6 +52,6 @@ public class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
-        assertThat(selected, is(4));
+        assertThat(selected, is(-15));
     }
 }
