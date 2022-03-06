@@ -3,6 +3,8 @@ package ru.job4j.tracker;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -12,7 +14,7 @@ public class ValidateInputTest {
     public void whenInvalidInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"one", "1"}
+                List.of(new String[]{"one", "1"})
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
@@ -23,7 +25,7 @@ public class ValidateInputTest {
     public void whenValidInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"1"}
+                List.of(new String[]{"1"})
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
@@ -34,7 +36,7 @@ public class ValidateInputTest {
     public void whenMultipleInvalidInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"1", "2", "3", "4"}
+                List.of(new String[]{"1", "2", "3", "4"})
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
@@ -51,7 +53,7 @@ public class ValidateInputTest {
     public void whenNegativeInvalidInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"-15"}
+                List.of(new String[]{"-15"})
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");

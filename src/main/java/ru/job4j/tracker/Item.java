@@ -21,12 +21,12 @@ public class Item {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public LocalDateTime getCreated() {
         return created;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
