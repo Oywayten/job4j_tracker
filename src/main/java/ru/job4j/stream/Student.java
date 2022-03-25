@@ -19,7 +19,7 @@ public class Student {
         return surname;
     }
 
-    public Student(String surname, int score) {
+    public Student(int score, String surname) {
         this.score = score;
         this.surname = surname;
     }
