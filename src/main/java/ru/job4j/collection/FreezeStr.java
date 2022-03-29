@@ -5,12 +5,19 @@ import java.util.stream.Collectors;
 
 public class FreezeStr {
     public static boolean eq(String left, String right) {
-        return right.chars().mapToObj(value -> (char) value)
+        return right.chars()
+                .mapToObj(value -> (char) value)
                 .collect(
                         Collectors.groupingBy(Function.identity(),
-                                Collectors.counting())).equals(left.chars().mapToObj(value -> (char) value)
+                                Collectors.counting())
+                )
+                .equals(
+                        left.chars()
+                        .mapToObj(value -> (char) value)
                         .collect(
                                 Collectors.groupingBy(Function.identity(),
-                                        Collectors.counting())));
+                                        Collectors.counting())
+                        )
+                );
     }
 }
