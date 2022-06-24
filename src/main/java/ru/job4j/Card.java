@@ -27,9 +27,8 @@ public class Card {
 
     public static void main(String[] args) {
         List<Card> cardDeck = Stream.of(Suit.values())
-                .flatMap(suit1 -> Stream.of(Value.values())
-                        .map(value1 -> new Card(suit1, value1))).toList();
-
+                .flatMap(s -> Stream.of(Value.values())
+                        .map(v -> new Card(s, v))).toList();
         cardDeck.forEach(System.out::println);
     }
 }
