@@ -2,7 +2,6 @@ package ru.job4j.tracker;
 
 import java.io.InputStream;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -45,7 +44,7 @@ public class SqlTracker implements Store, AutoCloseable {
         try (PreparedStatement statement = cn.prepareStatement("insert into items (fname, created) values (?, ?)",
                 Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
-            statement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             statement.execute();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -64,7 +63,7 @@ public class SqlTracker implements Store, AutoCloseable {
         try (PreparedStatement statement =
                      cn.prepareStatement("update items set fname = ?, created = ? where id = ?")) {
             statement.setString(1, item.getName());
-            statement.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             statement.setInt(3, id);
             execute = statement.executeUpdate() > 0;
         } catch (Exception e) {
@@ -89,14 +88,9 @@ public class SqlTracker implements Store, AutoCloseable {
     public List<Item> findAll() {
         List<Item> items = new LinkedList<>();
         try (PreparedStatement statement = cn.prepareStatement("select * from items")) {
-            statement.execute();
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    items.add(new Item(
-                            resultSet.getInt("id"),
-                            resultSet.getString("fname"),
-                            resultSet.getTimestamp("created").toLocalDateTime()
-                    ));
+                    items.add(getItem(resultSet));
                 }
             }
         } catch (Exception e) {
@@ -110,14 +104,9 @@ public class SqlTracker implements Store, AutoCloseable {
         List<Item> items = new LinkedList<>();
         try (PreparedStatement statement = cn.prepareStatement("select * from items where fname = ?")) {
             statement.setString(1, key);
-            statement.execute();
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    items.add(new Item(
-                            resultSet.getInt("id"),
-                            resultSet.getString("fname"),
-                            resultSet.getTimestamp("created").toLocalDateTime()
-                    ));
+                    items.add(getItem(resultSet));
                 }
             }
         } catch (Exception e) {
@@ -131,19 +120,22 @@ public class SqlTracker implements Store, AutoCloseable {
         Item item = null;
         try (PreparedStatement statement = cn.prepareStatement("select * from items where id = ?")) {
             statement.setInt(1, id);
-            statement.execute();
             try (ResultSet resultSet = statement.executeQuery()) {
-                resultSet.next();
-                item = new Item(
-                        resultSet.getInt("id"),
-                        resultSet.getString("fname"),
-                        resultSet.getTimestamp("created").toLocalDateTime()
-                );
-
+                if (resultSet.next()) {
+                    item = getItem(resultSet);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return item;
+    }
+
+    private Item getItem(ResultSet resultSet) throws SQLException {
+        return new Item(
+                resultSet.getInt("id"),
+                resultSet.getString("fname"),
+                resultSet.getTimestamp("created").toLocalDateTime()
+        );
     }
 }
