@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -65,16 +64,14 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        tracker.add(item);
+        Item item = tracker.add(new Item("item"));
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSameAndDeleteItemMustByTrueAndFindByIdMustBeNull() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        tracker.add(item);
+        Item item = tracker.add(new Item("item"));
         int id = item.getId();
         assertThat(tracker.findById(id), is(item));
         assertThat(tracker.delete(id), is(true));
@@ -84,50 +81,35 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveFewItemsAndFindAllItemsThenMustBeTheSameItems() {
         SqlTracker tracker = new SqlTracker(connection);
-        List<Item> expected = new LinkedList<>();
-        Item item1 = new Item("item1");
-        Item item2 = new Item("item2");
-        Item item3 = new Item("item3");
-        tracker.add(item1);
-        expected.add(item1);
-        tracker.add(item2);
-        expected.add(item2);
-        tracker.add(item3);
-        expected.add(item3);
+        Item item1 = tracker.add(new Item("item1"));
+        Item item2 = tracker.add(new Item("item2"));
+        Item item3 = tracker.add(new Item("item3"));
         assertThat(tracker.findAll().size(), is(3));
-        assertThat(tracker.findAll(), is(expected));
+        assertThat(tracker.findAll(), is(List.of(item1, item2, item3)));
     }
 
     @Test
     public void whenSave2ItemsWithSameNameAnd1ItemWithDiffNameAndFindByNameThenMustBeListWith2ItemsWithSameName() {
-        List<Item> expected = new LinkedList<>();
         SqlTracker tracker = new SqlTracker(connection);
-        Item item1 = new Item("item");
-        Item item2 = new Item("item");
-        Item item3 = new Item("itemNew");
+        Item item1 = tracker.add(new Item("item"));
+        Item item2 = tracker.add(new Item("item"));
+        Item item3 = tracker.add(new Item("itemNew"));
         String name = item1.getName();
-        tracker.add(item1);
-        expected.add(item1);
-        tracker.add(item2);
-        expected.add(item2);
-        tracker.add(item3);
-        expected.add(item3);
         List<Item> byName = tracker.findByName(name);
         assertThat(byName.size(), is(2));
-        assertThat(expected.containsAll(byName), is(true));
-        assertThat(byName.get(0), is(expected.get(0)));
-        assertThat(byName.get(1), is(expected.get(1)));
+        assertThat(List.of(item1, item2, item3).containsAll(byName), is(true));
+        assertThat(byName.get(0), is(item1));
+        assertThat(byName.get(1), is(item2));
     }
 
     @Test
     public void whenAddItemAndReplaceWithNewItemThenMustBeNewItem() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
+        Item item = tracker.add(new Item("item"));
         Item item1 = new Item("newItem");
-        tracker.add(item);
         int id = item.getId();
-        tracker.replace(item.getId(), item1);
-        assertThat(tracker.findById(id), is(item1));
+        assertThat(tracker.replace(item.getId(), item1), is(true));
+        assertThat(tracker.findById(id).getName(), is("newItem"));
     }
 
 }
