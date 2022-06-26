@@ -17,6 +17,9 @@ public class SqlTracker implements Store, AutoCloseable {
         cn = connection;
     }
 
+    /**
+     * В методе устанавливается соединение с базой
+     */
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
@@ -39,6 +42,11 @@ public class SqlTracker implements Store, AutoCloseable {
         }
     }
 
+    /**
+     * Метод добавляет переданный элемент в базу
+     * @param item элемент для добавления в базу
+     * @return возвращает переданный элемент
+     */
     @Override
     public Item add(Item item) {
         try (PreparedStatement statement = cn.prepareStatement("insert into items (fname, created) values (?, ?)",
@@ -57,6 +65,12 @@ public class SqlTracker implements Store, AutoCloseable {
         return item;
     }
 
+    /**
+     * Метод делает замену элемента
+     * @param id переданный параметр id элемента для замены. id остается старый, время создания берется из нового.
+     * @param item элемент, на который надо заменить старый элемент по переданному id
+     * @return возвращает true, если замена проведена успешно, false, если не успешно.
+     */
     @Override
     public boolean replace(int id, Item item) {
         boolean execute = false;
@@ -72,6 +86,11 @@ public class SqlTracker implements Store, AutoCloseable {
         return execute;
     }
 
+    /**
+     * Метод удаляет элемент по переданному id
+     * @param id id элемента для удаления
+     * @return true если удаление успешно
+     */
     @Override
     public boolean delete(int id) {
         boolean execute = false;
@@ -84,6 +103,10 @@ public class SqlTracker implements Store, AutoCloseable {
         return execute;
     }
 
+    /**
+     * Метод находит все записи в базе
+     * @return полный список элементов базы List<Item>
+     */
     @Override
     public List<Item> findAll() {
         List<Item> items = new LinkedList<>();
@@ -99,6 +122,11 @@ public class SqlTracker implements Store, AutoCloseable {
         return items;
     }
 
+    /**
+     * Метод находит все элементы с указанным именем
+     * @param key имя для поиска элементов
+     * @return список элементов List<Item> с указанным именем
+     */
     @Override
     public List<Item> findByName(String key) {
         List<Item> items = new LinkedList<>();
