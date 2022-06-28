@@ -93,13 +93,8 @@ public class SqlTrackerTest {
         SqlTracker tracker = new SqlTracker(connection);
         Item item1 = tracker.add(new Item("item"));
         Item item2 = tracker.add(new Item("item"));
-        Item item3 = tracker.add(new Item("itemNew"));
-        String name = item1.getName();
-        List<Item> byName = tracker.findByName(name);
-        assertThat(byName.size(), is(2));
-        assertThat(List.of(item1, item2, item3).containsAll(byName), is(true));
-        assertThat(byName.get(0), is(item1));
-        assertThat(byName.get(1), is(item2));
+        tracker.add(new Item("itemNew"));
+        assertThat(tracker.findByName("item"), is(List.of(item1, item2)));
     }
 
     @Test
