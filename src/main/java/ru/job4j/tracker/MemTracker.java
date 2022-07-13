@@ -45,6 +45,7 @@ public class MemTracker implements Store {
             return false;
         }
         items.remove(index);
+        ids--;
         return true;
     }
 
