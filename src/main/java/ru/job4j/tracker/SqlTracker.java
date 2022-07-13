@@ -44,6 +44,7 @@ public class SqlTracker implements Store, AutoCloseable {
 
     /**
      * Метод добавляет переданный элемент в базу
+     *
      * @param item элемент для добавления в базу
      * @return возвращает переданный элемент
      */
@@ -67,7 +68,8 @@ public class SqlTracker implements Store, AutoCloseable {
 
     /**
      * Метод делает замену элемента
-     * @param id переданный параметр id элемента для замены. id остается старый, время создания берется из нового.
+     *
+     * @param id   переданный параметр id элемента для замены. id остается старый, время создания берется из нового.
      * @param item элемент, на который надо заменить старый элемент по переданному id
      * @return возвращает true, если замена проведена успешно, false, если не успешно.
      */
@@ -88,6 +90,7 @@ public class SqlTracker implements Store, AutoCloseable {
 
     /**
      * Метод удаляет элемент по переданному id
+     *
      * @param id id элемента для удаления
      * @return true если удаление успешно
      */
@@ -105,6 +108,7 @@ public class SqlTracker implements Store, AutoCloseable {
 
     /**
      * Метод находит все записи в базе
+     *
      * @return полный список элементов базы List<Item>
      */
     @Override
@@ -124,6 +128,7 @@ public class SqlTracker implements Store, AutoCloseable {
 
     /**
      * Метод находит все элементы с указанным именем
+     *
      * @param key имя для поиска элементов
      * @return список элементов List<Item> с указанным именем
      */
