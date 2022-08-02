@@ -1,4 +1,4 @@
-package ru.job4j.map;
+package ru.job4j.mapold;
 
 import java.util.Map;
 import java.util.Optional;
