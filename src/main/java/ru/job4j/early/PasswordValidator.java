@@ -16,7 +16,7 @@ public class PasswordValidator {
     public static final String CHAR_ERROR = "Пароль должен содержать хотя бы один спец. символ (не цифра и не буква)";
     public static final String QWERTY_ERROR
             = "Пароль не должен содержать подстрок без учета регистра: qwerty, 12345, password, admin, user";
-    private static final String[] QWERTY = {"qwerty", "12345", "12345", "admin", "user"};
+    private static final String[] STOP_WORDS = {"qwerty", "12345", "12345", "admin", "user"};
 
     /**
      * Метод валидирует пароль с учетом всех ограничений
@@ -31,21 +31,21 @@ public class PasswordValidator {
         if (length < 8 || length > 32) {
             return LENGTH_ERROR;
         }
-        if (notValidChars(Character::isUpperCase, password)) {
+        if (charsConditionsCheck(Character::isUpperCase, password)) {
             return UP_ERROR;
         }
-        if (notValidChars(Character::isLowerCase, password)) {
+        if (charsConditionsCheck(Character::isLowerCase, password)) {
             return LOW_ERROR;
         }
-        if (notValidChars(Character::isDigit, password)) {
+        if (charsConditionsCheck(Character::isDigit, password)) {
             return DIGIT_ERROR;
         }
-        if (notValidChars(ch -> !Character.isDigit(ch)
+        if (charsConditionsCheck(ch -> !Character.isDigit(ch)
                 && !Character.isLetter(ch)
                 && !Character.isWhitespace(ch), password)) {
             return CHAR_ERROR;
         }
-        if (qwertyCheck(String::contains, password)) {
+        if (stopWordsCheck(String::contains, password)) {
             return QWERTY_ERROR;
         }
         return ALL_RIGHT;
@@ -57,10 +57,10 @@ public class PasswordValidator {
      * @param password строка пароля
      * @return true, если выполнено условие предиката
      */
-    private static boolean qwertyCheck(BiPredicate<String, String> predicate, String password) {
+    private static boolean stopWordsCheck(BiPredicate<String, String> predicate, String password) {
         boolean checkCondition = false;
         String lowPass = password.toLowerCase(Locale.ROOT);
-        for (String s : QWERTY) {
+        for (String s : STOP_WORDS) {
             if (predicate.test(lowPass, s)) {
                 checkCondition = true;
                 break;
@@ -75,7 +75,7 @@ public class PasswordValidator {
      * @param password строка пароля
      * @return true, если символы не валидны условию предиката
      */
-    private static boolean notValidChars(Predicate<Character> predicate, String password) {
+    private static boolean charsConditionsCheck(Predicate<Character> predicate, String password) {
         boolean checkCondition = false;
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
