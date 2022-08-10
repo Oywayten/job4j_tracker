@@ -7,6 +7,11 @@ import static org.assertj.core.api.Assertions.*;
 class PasswordValidatorTest {
 
     @Test
+    public void whenNullIsIAE() {
+        assertThatIllegalArgumentException().isThrownBy(() -> PasswordValidator.validate(null));
+    }
+
+    @Test
     public void whenisValid() {
         String password = "#aLOVbj31~";
         String actual = PasswordValidator.validate(password);
