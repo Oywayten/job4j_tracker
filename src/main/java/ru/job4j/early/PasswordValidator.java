@@ -29,24 +29,24 @@ public class PasswordValidator {
         }
         int length = password.length();
         if (length < 8 || length > 32) {
-            return LENGTH_ERROR;
+            throw new IllegalArgumentException(LENGTH_ERROR);
         }
         if (charsConditionsCheck(Character::isUpperCase, password)) {
-            return UP_ERROR;
+            throw new IllegalArgumentException(UP_ERROR);
         }
         if (charsConditionsCheck(Character::isLowerCase, password)) {
-            return LOW_ERROR;
+            throw new IllegalArgumentException(LOW_ERROR);
         }
         if (charsConditionsCheck(Character::isDigit, password)) {
-            return DIGIT_ERROR;
+            throw new IllegalArgumentException(DIGIT_ERROR);
         }
         if (charsConditionsCheck(ch -> !Character.isDigit(ch)
                 && !Character.isLetter(ch)
                 && !Character.isWhitespace(ch), password)) {
-            return CHAR_ERROR;
+            throw new IllegalArgumentException(CHAR_ERROR);
         }
         if (stopWordsCheck(String::contains, password)) {
-            return QWERTY_ERROR;
+            throw new IllegalArgumentException(QWERTY_ERROR);
         }
         return ALL_RIGHT;
     }

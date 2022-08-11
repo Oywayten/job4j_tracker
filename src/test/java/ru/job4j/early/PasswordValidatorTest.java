@@ -1,5 +1,6 @@
 package ru.job4j.early;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -20,51 +21,45 @@ class PasswordValidatorTest {
     }
 
     @Test
-    public void whenLengthIsShort() {
+    public void whenLengthShortIsLengthError() {
         String password = "aLOVbj~";
-        String actual = PasswordValidator.validate(password);
-        String expected = PasswordValidator.LENGTH_ERROR;
-        assertThat(actual).isEqualTo(expected);
+        assertThatIllegalArgumentException().isThrownBy(() -> PasswordValidator.validate(password))
+                .withMessage(PasswordValidator.LENGTH_ERROR);
     }
 
     @Test
-    public void whenWithoutUpperCase() {
+    public void whenWithoutUpperCaseIsUpError() {
         String password = "#alowbj31~";
-        String actual = PasswordValidator.validate(password);
-        String expected = PasswordValidator.UP_ERROR;
-        assertThat(actual).isEqualTo(expected);
+        assertThatIllegalArgumentException().isThrownBy(() -> PasswordValidator.validate(password))
+                .withMessage(PasswordValidator.UP_ERROR);
     }
 
     @Test
-    public void whenWithoutLowerCase() {
+    public void whenWithoutLowerCaseIsLowError() {
         String password = "#ALOWBJ31~";
-        String actual = PasswordValidator.validate(password);
-        String expected = PasswordValidator.LOW_ERROR;
-        assertThat(actual).isEqualTo(expected);
+        assertThatIllegalArgumentException().isThrownBy(() -> PasswordValidator.validate(password))
+                .withMessage(PasswordValidator.LOW_ERROR);
     }
 
     @Test
-    public void whenWithoutNums() {
+    public void whenWithoutNumsIsDigitError() {
         String password = "#aLOVbj~";
-        String actual = PasswordValidator.validate(password);
-        String expected = PasswordValidator.DIGIT_ERROR;
-        assertThat(actual).isEqualTo(expected);
+        assertThatIllegalArgumentException().isThrownBy(() -> PasswordValidator.validate(password))
+                .withMessage(PasswordValidator.DIGIT_ERROR);
     }
 
     @Test
-    public void whenWithoutChars() {
+    public void whenWithoutCharsIsCharError() {
         String password = "fdaLowj31";
-        String actual = PasswordValidator.validate(password);
-        String expected = PasswordValidator.CHAR_ERROR;
-        assertThat(actual).isEqualTo(expected);
+        assertThatIllegalArgumentException().isThrownBy(() -> PasswordValidator.validate(password))
+                .withMessage(PasswordValidator.CHAR_ERROR);
     }
 
     @Test
-    public void whenWithQwErtY() {
+    public void whenWithQwErtYIsQwertyError() {
         String password = "#ALOWQwErtYBJ31~";
-        String actual = PasswordValidator.validate(password);
-        String expected = PasswordValidator.QWERTY_ERROR;
-        assertThat(actual).isEqualTo(expected);
+        assertThatIllegalArgumentException().isThrownBy(() -> PasswordValidator.validate(password))
+                .withMessage(PasswordValidator.QWERTY_ERROR);
     }
 
 }
