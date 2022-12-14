@@ -19,12 +19,12 @@ import static org.junit.Assert.assertThat;
 
 public class SqlTrackerTest {
 
-  /*  private static Connection connection;
+    private static Connection connection;
 
-    *//**
+    /**
      * В методе выполняется инициализация подключения. Метод выполняется один раз до начала тестов.
-     *//*
-    @BeforeClass
+     */
+    /*@BeforeClass
     public static void initConnection() {
         try (InputStream in = SqlTrackerTest.class.getClassLoader().getResourceAsStream("test.properties")) {
             Properties config = new Properties();
@@ -39,22 +39,22 @@ public class SqlTrackerTest {
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
-    }
+    }*/
 
-    *//**
+    /**
      * В методе выполняется закрытие подключения. Метод выполняется один раз после тестов;
      * @throws SQLException ошибка работы с базой
-     *//*
-    @AfterClass
+     */
+    /*@AfterClass
     public static void closeConnection() throws SQLException {
         connection.close();
-    }
+    }*/
 
-    *//**
+    /**
      * В методе чистим таблицу items после внесенных изменений. Выполняется после каждого теста.
      * @throws SQLException ошибка работы с базой
-     *//*
-    @After
+     */
+    /*@After
     public void wipeTable() throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement("delete from items")) {
             statement.execute();
