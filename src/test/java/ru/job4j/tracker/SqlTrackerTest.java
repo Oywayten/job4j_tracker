@@ -1,10 +1,11 @@
 package ru.job4j.tracker;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,9 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SqlTrackerTest {
 
@@ -24,9 +23,9 @@ public class SqlTrackerTest {
     /**
      * В методе выполняется инициализация подключения. Метод выполняется один раз до начала тестов.
      */
-    @BeforeClass
+    @BeforeAll
     public static void initConnection() {
-        try (InputStream in = SqlTrackerTest.class.getClassLoader().getResourceAsStream("test.properties")) {
+        try (InputStream in = new FileInputStream("db/liquibase.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
@@ -34,7 +33,6 @@ public class SqlTrackerTest {
                     config.getProperty("url"),
                     config.getProperty("username"),
                     config.getProperty("password")
-
             );
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -43,18 +41,20 @@ public class SqlTrackerTest {
 
     /**
      * В методе выполняется закрытие подключения. Метод выполняется один раз после тестов;
+     *
      * @throws SQLException ошибка работы с базой
      */
-    @AfterClass
+    @AfterAll
     public static void closeConnection() throws SQLException {
         connection.close();
     }
 
     /**
      * В методе чистим таблицу items после внесенных изменений. Выполняется после каждого теста.
+     *
      * @throws SQLException ошибка работы с базой
      */
-    @After
+    @AfterEach
     public void wipeTable() throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement("delete from items")) {
             statement.execute();
@@ -65,7 +65,7 @@ public class SqlTrackerTest {
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = tracker.add(new Item("item"));
-        assertThat(tracker.findById(item.getId()), is(item));
+        assertThat(tracker.findById(item.getId())).isEqualTo(item);
     }
 
     @Test
@@ -73,9 +73,9 @@ public class SqlTrackerTest {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = tracker.add(new Item("item"));
         int id = item.getId();
-        assertThat(tracker.findById(id), is(item));
-        assertThat(tracker.delete(id), is(true));
-        assertNull(tracker.findById(id));
+        assertThat(tracker.findById(id)).isEqualTo(item);
+        assertThat(tracker.delete(id)).isTrue();
+        assertThat(tracker.findById(id)).isNull();
     }
 
     @Test
@@ -84,8 +84,8 @@ public class SqlTrackerTest {
         Item item1 = tracker.add(new Item("item1"));
         Item item2 = tracker.add(new Item("item2"));
         Item item3 = tracker.add(new Item("item3"));
-        assertThat(tracker.findAll().size(), is(3));
-        assertThat(tracker.findAll(), is(List.of(item1, item2, item3)));
+        assertThat(tracker.findAll().size()).isEqualTo(3);
+        assertThat(tracker.findAll()).isEqualTo(List.of(item1, item2, item3));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class SqlTrackerTest {
         Item item1 = tracker.add(new Item("item"));
         Item item2 = tracker.add(new Item("item"));
         tracker.add(new Item("itemNew"));
-        assertThat(tracker.findByName("item"), is(List.of(item1, item2)));
+        assertThat(tracker.findByName("item")).isEqualTo(List.of(item1, item2));
     }
 
     @Test
@@ -103,8 +103,7 @@ public class SqlTrackerTest {
         Item item = tracker.add(new Item("item"));
         Item item1 = new Item("newItem");
         int id = item.getId();
-        assertThat(tracker.replace(item.getId(), item1), is(true));
-        assertThat(tracker.findById(id).getName(), is("newItem"));
+        assertThat(tracker.replace(item.getId(), item1)).isTrue();
+        assertThat(tracker.findById(id).getName()).isEqualTo("newItem");
     }
-
 }
