@@ -1,12 +1,13 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-import static ru.job4j.stream.SummingMethod.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static ru.job4j.stream.SummingMethod.Bill;
+import static ru.job4j.stream.SummingMethod.User;
 
 public class SummingMethodTest {
 
@@ -26,7 +27,6 @@ public class SummingMethodTest {
                 "u2", 5,
                 "u3", 15
         );
-        assertEquals(expect, SummingMethod.summing(List.of(u1, u2, u3)));
+        assertThat(expect).isEqualTo(SummingMethod.summing(List.of(u1, u2, u3)));
     }
-
 }

@@ -1,24 +1,23 @@
 package ru.job4j.collection;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.is;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FreezeStrTest {
 
     @Test
     public void whenEq() {
-        assertThat(FreezeStr.eq("Hello", "Hlloe"), is(true));
+        assertThat(FreezeStr.eq("Hello", "Hlloe")).isEqualTo(true);
     }
 
     @Test
     public void whenNotEq() {
-        assertThat(FreezeStr.eq("Hello", "Halle"), is(false));
+        assertThat(FreezeStr.eq("Hello", "Halle")).isEqualTo(false);
     }
 
     @Test
     public void whenNotMultiEq() {
-        assertThat(FreezeStr.eq("heloo", "hello"), is(false));
+        assertThat(FreezeStr.eq("heloo", "hello")).isEqualTo(false);
     }
 }

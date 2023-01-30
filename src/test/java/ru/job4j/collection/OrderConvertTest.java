@@ -1,13 +1,12 @@
 package ru.job4j.collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderConvertTest {
     @Test
@@ -15,7 +14,7 @@ public class OrderConvertTest {
         List<Order> orders = new ArrayList<>();
         orders.add(new Order("3sfe", "Dress"));
         HashMap<String, Order> map = OrderConvert.process(orders);
-        assertThat(map.get("3sfe"), is(new Order("3sfe", "Dress")));
+        assertThat(map.get("3sfe")).isEqualTo(new Order("3sfe", "Dress"));
     }
 
     @Test
@@ -27,6 +26,6 @@ public class OrderConvertTest {
         orders.add(new Order("2afe", "2Dress"));
         orders.add(new Order("3sfe", "Dress"));
         HashMap<String, Order> map = OrderConvert.process(orders);
-        assertThat(map.size(), is(3));
+        assertThat(map.size()).isEqualTo(3);
     }
 }

@@ -1,12 +1,13 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-import static ru.job4j.stream.AveragingMethod.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static ru.job4j.stream.AveragingMethod.Company;
+import static ru.job4j.stream.AveragingMethod.Worker;
 
 public class AveragingMethodTest {
 
@@ -21,13 +22,11 @@ public class AveragingMethodTest {
         Worker w4 = new Worker(35, c3);
         Worker w5 = new Worker(40, c3);
         Worker w6 = new Worker(45, c3);
-
         Map<String, Double> expect = Map.of(
                 "Apple", 20D,
                 "Amazon", 27.5D,
                 "Microsoft", 40D
         );
-        assertEquals(expect, AveragingMethod.averaging(List.of(w1, w2, w3, w4, w5, w6)));
+        assertThat(expect).isEqualTo(AveragingMethod.averaging(List.of(w1, w2, w3, w4, w5, w6)));
     }
-
 }

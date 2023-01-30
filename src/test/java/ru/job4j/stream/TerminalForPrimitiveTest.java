@@ -1,8 +1,9 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.assertj.core.data.Percentage;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TerminalForPrimitiveTest {
 
@@ -10,11 +11,10 @@ public class TerminalForPrimitiveTest {
     public void test() {
         int[] data = {1, 2, 3};
         TerminalForPrimitive terminal = new TerminalForPrimitive(data);
-        assertEquals(3, terminal.count());
-        assertEquals(3, terminal.max());
-        assertEquals(1, terminal.min());
-        assertEquals(6, terminal.sum());
-        assertEquals(2, terminal.avg(), 0.01);
+        assertThat(3).isEqualTo(terminal.count());
+        assertThat(3).isEqualTo(terminal.max());
+        assertThat(1).isEqualTo(terminal.min());
+        assertThat(6).isEqualTo(terminal.sum());
+        assertThat(2).isCloseTo((int) terminal.avg(), Percentage.withPercentage(0.01));
     }
-
 }

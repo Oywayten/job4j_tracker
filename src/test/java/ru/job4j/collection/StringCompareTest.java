@@ -1,11 +1,8 @@
 package ru.job4j.collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThan;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringCompareTest {
     @Test
@@ -15,7 +12,7 @@ public class StringCompareTest {
                 "Ivanov",
                 "Ivanov"
         );
-        assertThat(rst, is(0));
+        assertThat(rst).isEqualTo(0);
     }
 
     @Test
@@ -25,7 +22,7 @@ public class StringCompareTest {
                 "Ivanov",
                 "Ivanova"
         );
-        assertThat(rst, lessThan(0));
+        assertThat(rst).isLessThan(0);
     }
 
     @Test
@@ -35,7 +32,7 @@ public class StringCompareTest {
                 "Petrov",
                 "Ivanova"
         );
-        assertThat(rst, greaterThan(0));
+        assertThat(rst).isGreaterThan(0);
     }
 
     @Test
@@ -45,7 +42,7 @@ public class StringCompareTest {
                 "Petrov",
                 "Patrov"
         );
-        assertThat(rst, greaterThan(0));
+        assertThat(rst).isGreaterThan(0);
     }
 
     @Test
@@ -55,7 +52,7 @@ public class StringCompareTest {
                 "Patrova",
                 "Petrov"
         );
-        assertThat(rst, lessThan(0));
+        assertThat(rst).isLessThan(0);
     }
 
     @Test
@@ -65,7 +62,7 @@ public class StringCompareTest {
                 "Qetrov",
                 "Petrov"
         );
-        assertThat(rst, greaterThan(0));
+        assertThat(rst).isGreaterThan(0);
     }
 
     @Test
@@ -75,6 +72,6 @@ public class StringCompareTest {
                 "Patrova",
                 "Qetrov"
         );
-        assertThat(rst, lessThan(0));
+        assertThat(rst).isLessThan(0);
     }
 }

@@ -1,9 +1,8 @@
 package ru.job4j.io;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShellTest {
 
@@ -13,8 +12,7 @@ public class ShellTest {
         shell.cd("/user");
         shell.cd("../root");
         assertThat(
-                shell.pwd(), is("/root")
-        );
+                shell.pwd()).isEqualTo("/root");
     }
 
     @Test
@@ -22,7 +20,7 @@ public class ShellTest {
         Shell shell = new Shell();
         shell.cd("/path/to/file");
         shell.cd("/new/path/to/my/file");
-        assertThat(shell.pwd(), is("/new/path/to/my/file"));
+        assertThat(shell.pwd()).isEqualTo("/new/path/to/my/file");
     }
 
     @Test
@@ -30,8 +28,7 @@ public class ShellTest {
         Shell shell = new Shell();
         shell.cd("/");
         assertThat(
-                shell.pwd(), is("/")
-        );
+                shell.pwd()).isEqualTo("/");
     }
 
     @Test
@@ -40,8 +37,7 @@ public class ShellTest {
         shell.cd("user");
         shell.cd("local");
         assertThat(
-                shell.pwd(), is("/user/local")
-        );
+                shell.pwd()).isEqualTo("/user/local");
     }
 
     @Test
@@ -50,7 +46,6 @@ public class ShellTest {
         shell.cd("user");
         shell.cd("..");
         assertThat(
-                shell.pwd(), is("/")
-        );
+                shell.pwd()).isEqualTo("/");
     }
 }

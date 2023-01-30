@@ -1,10 +1,10 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FilterObjectTest {
 
@@ -16,8 +16,7 @@ public class FilterObjectTest {
                 new FilterObject.User("Benjamin", 18)
         );
         FilterObject.User user = FilterObject.filter(users).iterator().next();
-        assertEquals("Boris", user.getName());
-        assertEquals(19, user.getAge());
+        assertThat("Boris").isEqualTo(user.getName());
+        assertThat(19).isEqualTo(user.getAge());
     }
-
 }

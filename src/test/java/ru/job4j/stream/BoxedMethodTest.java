@@ -1,19 +1,18 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoxedMethodTest {
 
     @Test
     public void test() {
-        assertEquals(
-                List.of(1, 2, 3),
-                BoxedMethod.boxed(new int[] {1, 2, 3})
+        assertThat(
+                List.of(1, 2, 3)).isEqualTo(
+                BoxedMethod.boxed(new int[]{1, 2, 3})
         );
     }
-
 }

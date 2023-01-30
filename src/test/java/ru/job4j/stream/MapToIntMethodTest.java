@@ -1,16 +1,15 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MapToIntMethodTest {
 
     @Test
     public void test() {
-        assertEquals(294, MapToIntMethod.sum(List.of('a', 'b', 'c')));
+        assertThat(294).isEqualTo(MapToIntMethod.sum(List.of('a', 'b', 'c')));
     }
-
 }

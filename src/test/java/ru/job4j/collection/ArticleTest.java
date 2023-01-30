@@ -1,9 +1,7 @@
 package ru.job4j.collection;
 
-import org.junit.Test;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 public class ArticleTest {
 
@@ -13,9 +11,7 @@ public class ArticleTest {
                 Article.generateBy(
                         "Мама мыла раму и окно",
                         "мыла окно"
-                ),
-                is(true)
-        );
+                )).isTrue();
     }
 
     @Test
@@ -24,9 +20,7 @@ public class ArticleTest {
                 Article.generateBy(
                         "Мама мыла раму и окно",
                         "мыла пол"
-                ),
-                is(false)
-        );
+                )).isFalse();
     }
 
     @Test
@@ -48,9 +42,8 @@ public class ArticleTest {
                                 + "Вздыхать и думать про себя: "
                                 + "Когда же черт возьмет тебя!",
                         "Мой дядя мог думать про тебя и день и ночь"
-                ),
-                is(true)
-        );
+                ))
+                .isTrue();
     }
 
     @Test
@@ -72,8 +65,7 @@ public class ArticleTest {
                                 + "Вздыхать и думать про себя: "
                                 + "Когда же черт возьмет тебя!",
                         "Мой дядя мог думать про Linux и Java день и ночь"
-                ),
-                is(false)
-        );
+                ))
+                .isFalse();
     }
 }

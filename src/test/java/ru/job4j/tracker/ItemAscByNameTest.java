@@ -1,13 +1,11 @@
 package ru.job4j.tracker;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ItemAscByNameTest {
 
@@ -16,6 +14,6 @@ public class ItemAscByNameTest {
         List<Item> items = Arrays.asList(new Item("First"), new Item("Third"), new Item("Second"));
         items.sort(new ItemAscByName());
         List<Item> expected = Arrays.asList(new Item("First"), new Item("Second"), new Item("Third"));
-        Assert.assertEquals(items, expected);
+        assertThat(items).isEqualTo(expected);
     }
 }

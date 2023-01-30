@@ -1,11 +1,10 @@
 package ru.job4j.tracker;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StartUITest {
     @Test
@@ -20,7 +19,7 @@ public class StartUITest {
                 new ExitAction(out)
         );
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findAll().get(0).getName(), is("Item name"));
+        assertThat(tracker.findAll().get(0).getName()).isEqualTo("Item name");
     }
 
     @Test
@@ -38,17 +37,17 @@ public class StartUITest {
         );
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        assertThat(out.toString(), is(
+        assertThat(out.toString()).isEqualTo(
                 "Menu:" + ln
-                        + "0. Edit item" + ln
-                        + "1. ExitAction Program" + ln
-                        + "=== Edit item ===" + ln
-                        + "Заявка изменена успешно." + ln
-                        + "Menu:" + ln
-                        + "0. Edit item" + ln
-                        + "1. ExitAction Program" + ln
-                        + "=== ExitAction Program ===" + ln
-        ));
+                + "0. Edit item" + ln
+                + "1. ExitAction Program" + ln
+                + "=== Edit item ===" + ln
+                + "Заявка изменена успешно." + ln
+                + "Menu:" + ln
+                + "0. Edit item" + ln
+                + "1. ExitAction Program" + ln
+                + "=== ExitAction Program ===" + ln
+        );
     }
 
     @Test
@@ -65,16 +64,16 @@ public class StartUITest {
         );
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        assertThat(out.toString(), is("Menu:" + ln
-                        + "0. Show all Item" + ln
-                        + "1. ExitAction Program" + ln
-                        + "=== Show all items ===" + ln
-                        + one + ln
-                        + "Menu:" + ln
-                        + "0. Show all Item" + ln
-                        + "1. ExitAction Program" + ln
-                        + "=== ExitAction Program ===" + ln
-                        ));
+        assertThat(out.toString()).isEqualTo("Menu:" + ln
+                                             + "0. Show all Item" + ln
+                                             + "1. ExitAction Program" + ln
+                                             + "=== Show all items ===" + ln
+                                             + one + ln
+                                             + "Menu:" + ln
+                                             + "0. Show all Item" + ln
+                                             + "1. ExitAction Program" + ln
+                                             + "=== ExitAction Program ===" + ln
+        );
     }
 
     @Test
@@ -92,16 +91,16 @@ public class StartUITest {
         );
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        assertThat(out.toString(), is("Menu:" + ln
-                + "0. Delete Item" + ln
-                + "1. ExitAction Program" + ln
-                + "=== Delete item ===" + ln
-                + "Заявка удалена успешно" + ln
-                + "Menu:" + ln
-                + "0. Delete Item" + ln
-                + "1. ExitAction Program" + ln
-                + "=== ExitAction Program ===" + ln
-        ));
+        assertThat(out.toString()).isEqualTo("Menu:" + ln
+                                             + "0. Delete Item" + ln
+                                             + "1. ExitAction Program" + ln
+                                             + "=== Delete item ===" + ln
+                                             + "Заявка удалена успешно" + ln
+                                             + "Menu:" + ln
+                                             + "0. Delete Item" + ln
+                                             + "1. ExitAction Program" + ln
+                                             + "=== ExitAction Program ===" + ln
+        );
     }
 
     @Test
@@ -119,16 +118,16 @@ public class StartUITest {
         );
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        assertThat(out.toString(), is("Menu:" + ln
-                + "0. Find Item by id" + ln
-                + "1. ExitAction Program" + ln
-                + "=== Find item by id ===" + ln
-                + one + ln
-                + "Menu:" + ln
-                + "0. Find Item by id" + ln
-                + "1. ExitAction Program" + ln
-                + "=== ExitAction Program ===" + ln
-        ));
+        assertThat(out.toString()).isEqualTo("Menu:" + ln
+                                             + "0. Find Item by id" + ln
+                                             + "1. ExitAction Program" + ln
+                                             + "=== Find item by id ===" + ln
+                                             + one + ln
+                                             + "Menu:" + ln
+                                             + "0. Find Item by id" + ln
+                                             + "1. ExitAction Program" + ln
+                                             + "=== ExitAction Program ===" + ln
+        );
     }
 
     @Test
@@ -147,16 +146,16 @@ public class StartUITest {
         );
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        assertThat(out.toString(), is("Menu:" + ln
-                + "0. Find Items by name" + ln
-                + "1. ExitAction Program" + ln
-                + "=== Find items by name ===" + ln
-                + two + ln
-                + "Menu:" + ln
-                + "0. Find Items by name" + ln
-                + "1. ExitAction Program" + ln
-                + "=== ExitAction Program ===" + ln
-        ));
+        assertThat(out.toString()).isEqualTo("Menu:" + ln
+                                             + "0. Find Items by name" + ln
+                                             + "1. ExitAction Program" + ln
+                                             + "=== Find items by name ===" + ln
+                                             + two + ln
+                                             + "Menu:" + ln
+                                             + "0. Find Items by name" + ln
+                                             + "1. ExitAction Program" + ln
+                                             + "=== ExitAction Program ===" + ln
+        );
     }
 
     @Test
@@ -170,11 +169,11 @@ public class StartUITest {
                 new ExitAction(out)
         );
         new StartUI(out).init(in, tracker, actions);
-        assertThat(out.toString(), is(
+        assertThat(out.toString()).isEqualTo(
                 "Menu:" + System.lineSeparator()
-                        + "0. ExitAction Program" + System.lineSeparator()
-                        + "=== ExitAction Program ===" + System.lineSeparator()
-        ));
+                + "0. ExitAction Program" + System.lineSeparator()
+                + "=== ExitAction Program ===" + System.lineSeparator()
+        );
     }
 
     @Test
@@ -189,14 +188,13 @@ public class StartUITest {
         );
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        assertThat(out.toString(), is(
-                        "Menu:" + ln
-                                + "0. ExitAction Program" + ln
-                                + "Wrong input, you can select: 0 .. 0" + ln
-                                + "Menu:" + ln
-                                + "0. ExitAction Program" + ln
-                                + "=== ExitAction Program ===" + ln
-                )
+        assertThat(out.toString()).isEqualTo(
+                "Menu:" + ln
+                + "0. ExitAction Program" + ln
+                + "Wrong input, you can select: 0 .. 0" + ln
+                + "Menu:" + ln
+                + "0. ExitAction Program" + ln
+                + "=== ExitAction Program ===" + ln
         );
     }
 }

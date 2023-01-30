@@ -1,10 +1,11 @@
 package ru.job4j.list;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.List;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConvertMatrix2ListTest {
     @Test
@@ -18,6 +19,6 @@ public class ConvertMatrix2ListTest {
                 1, 2, 3, 4
         );
         List<Integer> result = list.toList(input);
-        assertThat(result, is(expect));
+        assertThat(result).isEqualTo(expect);
     }
 }

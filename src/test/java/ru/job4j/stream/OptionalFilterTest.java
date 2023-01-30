@@ -1,11 +1,12 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static ru.job4j.stream.OptionalFilter.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static ru.job4j.stream.OptionalFilter.Child;
+import static ru.job4j.stream.OptionalFilter.Worker;
 
 public class OptionalFilterTest {
 
@@ -17,7 +18,7 @@ public class OptionalFilterTest {
         Child c4 = new Child("c2", 15);
         Worker worker1 = new Worker("123", List.of(c1, c2));
         Worker worker2 = new Worker("456", List.of(c3, c4));
-        assertEquals(List.of(), OptionalFilter.defineChildren(List.of(worker1, worker2), "123"));
+        assertThat(List.of()).isEqualTo(OptionalFilter.defineChildren(List.of(worker1, worker2), "123"));
     }
 
     @Test
@@ -28,7 +29,7 @@ public class OptionalFilterTest {
         Child c4 = new Child("c2", 15);
         Worker worker1 = new Worker("123", List.of(c1, c2, c3));
         Worker worker2 = new Worker("456", List.of(c4));
-        assertEquals(List.of(), OptionalFilter.defineChildren(List.of(worker1, worker2), "123"));
+        assertThat(List.of()).isEqualTo(OptionalFilter.defineChildren(List.of(worker1, worker2), "123"));
     }
 
     @Test
@@ -39,6 +40,6 @@ public class OptionalFilterTest {
         Child c4 = new Child("c2", 15);
         Worker worker1 = new Worker("123", List.of(c1, c2, c3));
         Worker worker2 = new Worker("456", List.of(c4));
-        assertEquals(2, OptionalFilter.defineChildren(List.of(worker1, worker2), "123").size());
+        assertThat(2).isEqualTo(OptionalFilter.defineChildren(List.of(worker1, worker2), "123").size());
     }
 }

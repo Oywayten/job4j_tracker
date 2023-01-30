@@ -1,18 +1,18 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OptionalFlatMapTest {
 
     @Test
     public void whenExist() {
-        assertEquals(
-                Optional.of("Hello.java".length()),
+        assertThat(
+                Optional.of("Hello.java".length())).isEqualTo(
                 OptionalFlatMap.flatMap(
                         List.of("Hello.java", "Hello.js", "Hello.py")
                 )
@@ -21,12 +21,11 @@ public class OptionalFlatMapTest {
 
     @Test
     public void whenNotExist() {
-        assertEquals(
-                Optional.empty(),
+        assertThat(
+                Optional.empty()).isEqualTo(
                 OptionalFlatMap.flatMap(
                         List.of("Hello.cpp", "Hello.js", "Hello.py")
                 )
         );
     }
-
 }

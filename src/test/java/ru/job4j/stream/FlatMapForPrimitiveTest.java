@@ -1,15 +1,15 @@
 package ru.job4j.stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FlatMapForPrimitiveTest {
     @Test
     public void test() {
-        assertEquals(
-                15,
-                FlatMapForPrimitive.sum(new int[][] {
+        assertThat(
+                15).isEqualTo(
+                FlatMapForPrimitive.sum(new int[][]{
                         {1, 2, 3},
                         {4, 5}
                 })
