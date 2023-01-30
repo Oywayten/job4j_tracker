@@ -30,10 +30,15 @@ class ReplaceActionTest {
     @Test
     public void whenReplaceAndItemNotFound() {
         Output out = new StubOutput();
+        /*final Item item = new Item("Name");
+        out.println(item);*/
+        String replacedName = "Replaced item";
         Store tracker = new MemTracker();
-        tracker.add(new Item("Replaced item"));
+        tracker.add(new Item(replacedName));
         ReplaceAction rep = new ReplaceAction(out);
         Input input = mock(Input.class);
+        when(input.askInt(any(String.class))).thenReturn(5);
+        when(input.askStr(any(String.class))).thenReturn(replacedName);
         rep.execute(input, tracker);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo("=== Edit item ===" + ln + "Ошибка замены заявки." + ln);
