@@ -1,6 +1,6 @@
 create table if not exists items (
     id serial primary key,
-    fname text,
+    name text,
     created timestamp
 );
 
