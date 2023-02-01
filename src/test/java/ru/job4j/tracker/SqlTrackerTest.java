@@ -81,11 +81,16 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveFewItemsAndFindAllItemsThenMustBeTheSameItems() {
         SqlTracker tracker = new SqlTracker(connection);
+        final List<Item> all = tracker.findAll();
+        for (Item item : all) {
+            tracker.delete(item.getId());
+        }
         Item item1 = tracker.add(new Item("item1"));
         Item item2 = tracker.add(new Item("item2"));
         Item item3 = tracker.add(new Item("item3"));
-        assertThat(tracker.findAll().size()).isEqualTo(3);
-        assertThat(tracker.findAll()).isEqualTo(List.of(item1, item2, item3));
+        all.addAll(tracker.findAll());
+        assertThat(all.size()).isEqualTo(3);
+        assertThat(all).isEqualTo(List.of(item1, item2, item3));
     }
 
     @Test
