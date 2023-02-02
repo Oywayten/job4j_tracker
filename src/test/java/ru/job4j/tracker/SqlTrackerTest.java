@@ -1,16 +1,10 @@
 package ru.job4j.tracker;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Properties;
 
@@ -50,13 +44,14 @@ public class SqlTrackerTest {
     }
 
     /**
-     * В методе чистим таблицу items после внесенных изменений. Выполняется после каждого теста.
+     * В методе чистим таблицу items после внесенных изменений. Выполняется до и после каждого теста.
      *
      * @throws SQLException ошибка работы с базой
      */
+    @BeforeEach
     @AfterEach
     public void wipeTable() throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement("delete from items")) {
+        try (PreparedStatement statement = connection.prepareStatement("truncate table items restart identity")) {
             statement.execute();
         }
     }
