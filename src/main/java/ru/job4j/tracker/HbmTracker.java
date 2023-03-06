@@ -16,11 +16,9 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public Item add(Item item) {
         final Session session = sf.openSession();
-        int id;
         try {
             session.beginTransaction();
-            id = (Integer) session.save(item);
-            item.setId(id);
+            session.save(item);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
