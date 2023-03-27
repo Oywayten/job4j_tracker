@@ -1,26 +1,43 @@
 package ru.job4j.tracker;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import ru.job4j.toone.User;
 
 import javax.persistence.*;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "items")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode
 public class Item {
 
-    @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NonNull
     private String name;
-    @EqualsAndHashCode.Exclude
+
     private LocalDateTime created = LocalDateTime.now();
+
+    @ManyToMany
+    @JoinTable(
+            name = "participates",
+            joinColumns = { @JoinColumn(name = "item_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    private List<User> participates = new ArrayList<>();
+
+    public Item(int id, @NonNull String name, LocalDateTime created) {
+        this.id = id;
+        this.name = name;
+        this.created = created;
+    }
 }
