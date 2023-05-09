@@ -22,7 +22,7 @@
         <mockito-core.version>4.8.0</mockito-core.version>
         <lombok.version>1.18.22</lombok.version>
         <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-        <liquibase-maven-plugin.version>4.15.0</liquibase-maven-plugin.version>
+        <liquibase-maven-plugin.version>4.21.0</liquibase-maven-plugin.version>
         <maven-plugin.version>3.2.0</maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     </properties>

@@ -51,7 +51,7 @@ public class SqlTrackerTest {
     @BeforeEach
     @AfterEach
     public void wipeTable() throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement("truncate table items restart identity")) {
+        try (PreparedStatement statement = connection.prepareStatement("DELETE FROM items as i WHERE i.id > 0")) {
             statement.execute();
         }
     }
