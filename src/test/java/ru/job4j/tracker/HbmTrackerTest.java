@@ -41,7 +41,7 @@ class HbmTrackerTest {
             tracker.add(item3);
             List<Item> expectedItems = List.of(item1, item2, item3);
             List<Item> actualItems = tracker.findAll();
-            assertThat(actualItems).usingRecursiveFieldByFieldElementComparatorIgnoringFields("created").isEqualTo(expectedItems);
+            assertThat(actualItems).isEqualTo(expectedItems);
         }
     }
 
